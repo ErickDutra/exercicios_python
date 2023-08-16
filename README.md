@@ -1,2 +1,5 @@
-# exercicios_python
- exercitar o conhecimento:
+--- Exercicios Python 
+
+Repositório criado para projetos de aprendizagem.
+
+- Palavra Secreta (jogo)
