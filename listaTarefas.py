@@ -1,11 +1,8 @@
 import os
-
-tarefas = []
-
-tarefas_refazer = []
+import json
 
 
-def listar_tarefas(tarefas):
+def listar(tarefas):
     if not tarefas:
         print("nenhuma tarefa listada")
         print()
@@ -24,6 +21,7 @@ def desfazer(tarefas, tarefas_refazer):
     tarefa = tarefas.pop()
     tarefas_refazer.append(tarefa)
     print()
+    listar(tarefas)
 
 
 def refazer(tarefas, tarefas_refazer):
@@ -34,6 +32,7 @@ def refazer(tarefas, tarefas_refazer):
     tarefa = tarefas_refazer.pop()
     tarefas.append(tarefa)
     print()
+    listar(tarefas)
 
 
 def adicionar(tarefa, tarefas):
@@ -44,32 +43,47 @@ def adicionar(tarefa, tarefas):
 
     tarefas.append(tarefa)
     print()
+    listar(tarefas)
 
+
+def ler(tarefas, caminho_arquivo):
+    dados = []
+    try:
+        with open(caminho_arquivo, "r", encoding="utf8") as arquivo:
+            dados = json.load(arquivo)
+    except FileExistsError:
+        print("Arquivo não existe")
+        salvar(tarefas, caminho_arquivo)
+    return dados
+
+
+def salvar(tarefas, caminho_arquivo):
+    dados = tarefas
+    with open(caminho_arquivo, "w", encoding="utf8") as arquivo:
+        dados = json.dump(tarefas, arquivo, indent=2, ensure_ascii=False)
+    return dados
+
+CAMINHO_ARQUIVO = "tarefas.json"
+tarefas = ler([], CAMINHO_ARQUIVO)
+tarefas_refazer = []
 
 while True:
     print("Comandos: listar, desfazer, refazer")
-    tarefa = str(input("Digite uma tarefa ou um comando: ")).strip(" ")
+    tarefa = input("Digite uma tarefa ou um comando: ")
 
-    if tarefa == "listar":
-        listar_tarefas(tarefas)
-        continue
+    comandos = {
+        "listar": lambda: listar(tarefas),
+        "desfazer": lambda: desfazer(tarefas, tarefas_refazer),
+        "refazer": lambda: refazer(tarefas, tarefas_refazer),
+        "clear": lambda: os.system("cls"),
+        "adicionar": lambda: adicionar(tarefa, tarefas),
+    }
 
-    elif tarefa == "desfazer":
-        desfazer(tarefas, tarefas_refazer)
-        listar_tarefas(tarefas)
-        continue
+    comando = (
+        comandos.get(tarefa)
+        if comandos.get(tarefa) is not None
+        else comandos["adicionar"]
+    )
 
-    elif tarefa == "refazer":
-        refazer(tarefas, tarefas_refazer)
-        listar_tarefas(tarefas)
-        continue
-
-    elif tarefa == "clear":
-        os.system("cls")
-        continue
-
-    elif tarefa == "sair":
-        break
-
-    else:
-        adicionar(tarefa, tarefas)
+    comando()
+    salvar(tarefas, CAMINHO_ARQUIVO)
