@@ -19,9 +19,13 @@ p2 = Pessoa('Erick', 25)
 bd = [vars(p1), vars(p2)]
 
 
-
-with open('dados.json', 'w', encoding='utf-8') as arquivo:
-    json.dump(bd, arquivo)
+def fazer_dump():
+    with open('dados.json', 'w', encoding='utf-8') as arquivo:
+        json.dump(bd, arquivo, ensure_ascii=False, indent=2)
+        
+        
+if __name__ == '__main__':
+    fazer_dump()
 
 
 
