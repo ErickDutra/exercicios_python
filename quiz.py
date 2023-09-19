@@ -35,6 +35,7 @@ while True:
             print(questao["Pergunta"])
             opcoes = questao["Opcoes"]
             resposta = input(f"Responda de acordo com as opçoes : {opcoes} : ")
+            
             if resposta == questao["Resposta"]:
                 print("voce acertou !!! ")
                 score = score + int(questao["Score"])
