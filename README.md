@@ -11,5 +11,12 @@ Repositório criado para projetos de aprendizagem.
 
 Arquivo estudo:
 
-- Herança multipla 
+- Herança multipla
+- Herança
+- Super
+- Dunder Methods (https://rszalski.github.io/magicmethods/) 
 - Composição
+- Exceptions Error
+- Abstract Methods, with Property 44
+- Polimorfismo
+  
