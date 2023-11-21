@@ -8,6 +8,7 @@ Repositório criado para projetos de aprendizagem.
 - Quiz (manipulação de dicionário)
 - Lista de Tarefas(opções desfazer e refazer)(usando arquivo Json)
 - Salvando Dados (Salvando dados de uma Classe em arquivo Json e extraindo em um arquivo paralelo)
+- Manipulação de datas (DateTime, RelativeDelta)
 
 Arquivo estudo:
 
