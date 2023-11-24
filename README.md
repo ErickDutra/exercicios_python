@@ -20,4 +20,8 @@ Arquivo estudo:
 - Exceptions Error
 - Abstract Methods, with Property 44
 - Polimorfismo
+- ListDir
+- PathLib
+- Context Manager
+- Decorator
   
